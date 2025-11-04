@@ -4,14 +4,11 @@
 
 :root {
   /* Light mode colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
+  --bg-primary: #111A22;
+  --text-primary: #efefef;
 }
 
-.dark {
+.light {
   /* Dark mode colors */
   --bg-primary: #111827;
   --bg-secondary: #1f2937;
@@ -22,7 +19,7 @@
 
 /* Base styles */
 body {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
