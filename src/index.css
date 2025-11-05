@@ -4,18 +4,18 @@
 
 :root {
   /* Light mode colors */
-  --bg-primary: #111A22;
+  --bg-primary: #13120A;
   --text-primary: #efefef;
+  --light-gray: #23231F;
 }
 
-.light {
-  /* Dark mode colors */
-  --bg-primary: #111827;
+/* .light {
+  --bg-primary: #13120A;
   --bg-secondary: #1f2937;
   --text-primary: #f9fafb;
   --text-secondary: #d1d5db;
   --border-color: #374151;
-}
+} */
 
 /* Base styles */
 body {

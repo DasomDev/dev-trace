@@ -1,5 +1,6 @@
 export { Button } from './Button'
-export { Input } from './Input'
-export { Textarea } from './Textarea'
 export { Card } from './Card'
+// export { Select } from './Select'
+export { Textarea } from './Textarea'
+export { TextInput } from './TextInput'
 

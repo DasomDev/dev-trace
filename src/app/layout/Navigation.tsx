@@ -8,7 +8,7 @@ export const Navigation = () => {
     { path: "/add", label: "Projects" },
   ];
   return (
-    <nav className="border-r border-[#1E2F3E] shadow-sm w-[260px] p-6">
+    <nav className="border-r border-[#333333] shadow-sm w-[260px] p-6">
       <div className="flex flex-col gap-4">
         {navItems.map((item) => (
           <Link
@@ -16,7 +16,7 @@ export const Navigation = () => {
             to={item.path}
             className={`px-3 py-2 h-10 flex items-center rounded-md text-sm font-medium transition-colors ${
               location.pathname === item.path
-                ? "bg-[#233648]"
+                ? "bg-[#333333]"
                 : ""
             }`}
           >
