@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { recordStorage } from '@/entities/record_copy/storage'
-import type { DevRecord, DevRecordFormData } from '@/entities/record_copy/types'
+import { recordStorage } from '@/entities/record/storage'
+import type { DevRecord, DevRecordFormData } from '@/entities/record/types'
 
 export const useRecord = () => {
   const getAll = useCallback((): DevRecord[] => {

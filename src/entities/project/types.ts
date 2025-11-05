@@ -1,7 +1,9 @@
 export interface Project {
-  id: number;
+  id?: string; // Firestore autoId
   name: string;
-  logs?: Log[]; // 선택적으로 프로젝트 안에 포함
+  description?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface Log {

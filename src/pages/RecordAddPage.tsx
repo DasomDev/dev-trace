@@ -5,7 +5,7 @@ export const RecordAddPage = () => {
   return (
     <Layout>
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">새 기록 작성</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">새 기록 작성</h2>
         <RecordForm />
       </div>
     </Layout>

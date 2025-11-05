@@ -3,18 +3,18 @@ import { Layout } from '@/app/layout/Layout'
 // import { RecordTree } from '@/features/record/RecordTree'
 // import { SearchBar } from '@/features/search/SearchBar'
 // import { FilterPanel } from '@/features/search/FilterPanel'
-import { useState } from 'react'
-import type { DevRecord } from '@/entities/record/types'
+// import { useState } from 'react'
+// import type { DevRecord } from '@/entities/record/types'
 
 export const RecordListPage = () => {
-  const [selectedRecord, setSelectedRecord] = useState<DevRecord | null>(null)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [filters, setFilters] = useState({
-    author: '',
-    tags: [] as string[],
-    dateFrom: '',
-    dateTo: '',
-  })
+  // const [selectedRecord, setSelectedRecord] = useState<DevRecord | null>(null)
+  // const [searchQuery, setSearchQuery] = useState('')
+  // const [filters, setFilters] = useState({
+  //   author: '',
+  //   tags: [] as string[],
+  //   dateFrom: '',
+  //   dateTo: '',
+  // })
 
   return (
     <Layout>
