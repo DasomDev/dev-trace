@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { HomePage } from '@/pages/home/index'
-import { TaskAddPage } from '@/pages/TaskAddPage'
+import { TaskAddPage } from '@/pages/task/TaskAddPage'
 // import { TaskListPage } from '@/pages/TaskListPage'
 // import { TaskDetailPage } from '@/pages/TaskDetailPage'
 
