@@ -1,13 +1,13 @@
 import { Layout } from '@/app/layout/Layout'
-// import { RecordList } from '@/features/record/RecordList'
-// import { RecordTree } from '@/features/record/RecordTree'
+// import { TaskList } from '@/features/task/TaskList'
+// import { TaskTree } from '@/features/task/TaskTree'
 // import { SearchBar } from '@/features/search/SearchBar'
 // import { FilterPanel } from '@/features/search/FilterPanel'
 // import { useState } from 'react'
-// import type { DevRecord } from '@/entities/record/types'
+// import type { DevTask } from '@/entities/task/types'
 
-export const RecordListPage = () => {
-  // const [selectedRecord, setSelectedRecord] = useState<DevRecord | null>(null)
+export const TaskListPage = () => {
+  // const [selectedTask, setSelectedTask] = useState<DevTask | null>(null)
   // const [searchQuery, setSearchQuery] = useState('')
   // const [filters, setFilters] = useState({
   //   author: '',
@@ -19,8 +19,8 @@ export const RecordListPage = () => {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gray-900">개발 기록</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-900">개발 작업</h2>
         </div>
         
         <div className="flex gap-4">
@@ -28,17 +28,17 @@ export const RecordListPage = () => {
           {/* <FilterPanel filters={filters} onFiltersChange={setFilters} /> */}
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="lg:col-span-1">
-            {/* <RecordTree
-              onRecordSelect={setSelectedRecord}
+            {/* <TaskTree
+              onTaskSelect={setSelectedTask}
               searchQuery={searchQuery}
               filters={filters}
             /> */}
           </div>
           <div className="lg:col-span-2">
-            {/* <RecordList
-              selectedRecord={selectedRecord}
+            {/* <TaskList
+              selectedTask={selectedTask}
               searchQuery={searchQuery}
               filters={filters}
             /> */}

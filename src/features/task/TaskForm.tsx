@@ -1,69 +1,69 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecord } from "./useRecord";
-import { Button, TextInput, Textarea } from "@/shared/ui";
-import type { DevRecordFormData } from "@/entities/record/types";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useTask } from './useTask'
+import { Button, TextInput, Textarea } from '@/shared/ui'
+import type { DevTaskFormData } from '@/entities/task/types'
 
-export const RecordForm = () => {
-  const navigate = useNavigate();
-  const { save } = useRecord();
+export const TaskForm = () => {
+  const navigate = useNavigate()
+  const { save } = useTask()
 
-  const [formData, setFormData] = useState<DevRecordFormData>({
-    featureName: "",
+  const [formData, setFormData] = useState<DevTaskFormData>({
+    featureName: '',
     relatedFiles: [],
-    intent: "",
-    errorCases: "",
-    dependencies: "",
-    testCriteria: "",
-    author: "",
+    intent: '',
+    errorCases: '',
+    dependencies: '',
+    testCriteria: '',
+    author: '',
     tags: [],
-  });
+  })
 
-  const [currentTag, setCurrentTag] = useState("");
+  const [currentTag, setCurrentTag] = useState('')
   const [errors, setErrors] = useState<
-    Partial<Record<keyof DevRecordFormData, string>>
-  >({});
+    Partial<Record<keyof DevTaskFormData, string>>
+  >({})
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // 유효성 검사
-    const newErrors: Partial<Record<keyof DevRecordFormData, string>> = {};
+    const newErrors: Partial<Record<keyof DevTaskFormData, string>> = {}
     if (!formData.featureName.trim())
-      newErrors.featureName = "기능명을 입력해주세요";
-    if (!formData.intent.trim()) newErrors.intent = "의도를 입력해주세요";
-    if (!formData.author.trim()) newErrors.author = "작성자를 입력해주세요";
+      newErrors.featureName = '기능명을 입력해주세요'
+    if (!formData.intent.trim()) newErrors.intent = '의도를 입력해주세요'
+    if (!formData.author.trim()) newErrors.author = '작성자를 입력해주세요'
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+      setErrors(newErrors)
+      return
     }
 
     try {
-      const record = save(formData);
-      navigate(`/record/${record.id}`);
+      const task = save(formData)
+      navigate(`/task/${task.id}`)
     } catch (error) {
-      console.error("저장 실패:", error);
-      alert("저장에 실패했습니다.");
+      console.error('저장 실패:', error)
+      alert('저장에 실패했습니다.')
     }
-  };
+  }
 
   const addTag = () => {
     if (currentTag.trim() && !formData.tags.includes(currentTag.trim())) {
       setFormData({
         ...formData,
         tags: [...formData.tags, currentTag.trim()],
-      });
-      setCurrentTag("");
+      })
+      setCurrentTag('')
     }
-  };
+  }
 
   const removeTag = (tag: string) => {
     setFormData({
       ...formData,
       tags: formData.tags.filter((t) => t !== tag),
-    });
-  };
+    })
+  }
 
   return (
     <form
@@ -74,8 +74,8 @@ export const RecordForm = () => {
         label="기능명 *"
         value={formData.featureName}
         onChange={(e) => {
-          setFormData({ ...formData, featureName: e.target.value });
-          setErrors({ ...errors, featureName: "" });
+          setFormData({ ...formData, featureName: e.target.value })
+          setErrors({ ...errors, featureName: '' })
         }}
         className="text-orange-300"
         error={errors.featureName}
@@ -86,8 +86,8 @@ export const RecordForm = () => {
         label="의도 (Why) *"
         value={formData.intent}
         onChange={(e) => {
-          setFormData({ ...formData, intent: e.target.value });
-          setErrors({ ...errors, intent: "" });
+          setFormData({ ...formData, intent: e.target.value })
+          setErrors({ ...errors, intent: '' })
         }}
         error={errors.intent}
         placeholder="이 기능을 구현한 이유와 목적을 설명해주세요"
@@ -128,15 +128,15 @@ export const RecordForm = () => {
         label="작성자 *"
         value={formData.author}
         onChange={(e) => {
-          setFormData({ ...formData, author: e.target.value });
-          setErrors({ ...errors, author: "" });
+          setFormData({ ...formData, author: e.target.value })
+          setErrors({ ...errors, author: '' })
         }}
         error={errors.author}
         placeholder="작성자 이름"
       />
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block mb-1 text-sm font-medium text-gray-700">
           태그
         </label>
         <div className="flex gap-2 mb-2">
@@ -145,13 +145,13 @@ export const RecordForm = () => {
             value={currentTag}
             onChange={(e) => setCurrentTag(e.target.value)}
             onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                addTag();
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                addTag()
               }
             }}
             placeholder="예: payment, error"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <Button type="button" onClick={addTag} variant="secondary">
             추가
@@ -162,7 +162,7 @@ export const RecordForm = () => {
             {formData.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded"
+                className="inline-flex gap-1 items-center px-2 py-1 text-sm text-blue-700 bg-blue-100 rounded"
               >
                 #{tag}
                 <button
@@ -178,8 +178,8 @@ export const RecordForm = () => {
         )}
       </div>
 
-      <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
-        <Button type="button" variant="ghost" onClick={() => navigate("/")}>
+      <div className="flex gap-3 justify-end pt-4 border-t border-gray-200">
+        <Button type="button" variant="ghost" onClick={() => navigate('/')}>
           취소
         </Button>
         <Button type="submit" variant="primary">
@@ -187,5 +187,6 @@ export const RecordForm = () => {
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}
+

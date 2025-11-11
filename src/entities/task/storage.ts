@@ -1,9 +1,9 @@
-import type { DevRecord } from './types'
+import type { DevTask } from './types'
 
-const STORAGE_KEY = 'dev-trace-records'
+const STORAGE_KEY = 'dev-trace-tasks'
 
-export const recordStorage = {
-  getAll(): DevRecord[] {
+export const taskStorage = {
+  getAll(): DevTask[] {
     const data = localStorage.getItem(STORAGE_KEY)
     if (!data) return []
     try {
@@ -13,42 +13,42 @@ export const recordStorage = {
     }
   },
 
-  save(record: DevRecord): void {
-    const records = this.getAll()
-    const existingIndex = records.findIndex((r) => r.id === record.id)
+  save(task: DevTask): void {
+    const tasks = this.getAll()
+    const existingIndex = tasks.findIndex((t) => t.id === task.id)
     
     if (existingIndex >= 0) {
-      // 기존 기록 수정 시 히스토리 저장
-      const existing = records[existingIndex]
-      const history: DevRecordHistory = {
+      // 기존 작업 수정 시 히스토리 저장
+      const existing = tasks[existingIndex]
+      const history: DevTaskHistory = {
         version: existing.version,
-        changedBy: record.author,
+        changedBy: task.author,
         changedAt: new Date().toISOString(),
-        changes: this.getChanges(existing, record),
+        changes: this.getChanges(existing, task),
       }
       
-      record.version = existing.version + 1
-      record.history = [...(existing.history || []), history]
-      records[existingIndex] = record
+      task.version = existing.version + 1
+      task.history = [...(existing.history || []), history]
+      tasks[existingIndex] = task
     } else {
-      records.push(record)
+      tasks.push(task)
     }
     
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(records))
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
   },
 
   delete(id: string): void {
-    const records = this.getAll()
-    const filtered = records.filter((r) => r.id !== id)
+    const tasks = this.getAll()
+    const filtered = tasks.filter((t) => t.id !== id)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
   },
 
-  getById(id: string): DevRecord | null {
-    const records = this.getAll()
-    return records.find((r) => r.id === id) || null
+  getById(id: string): DevTask | null {
+    const tasks = this.getAll()
+    return tasks.find((t) => t.id === id) || null
   },
 
-  getChanges(old: DevRecord, updated: DevRecord): string {
+  getChanges(old: DevTask, updated: DevTask): string {
     const changes: string[] = []
     
     if (old.featureName !== updated.featureName) changes.push(`기능명: ${old.featureName} → ${updated.featureName}`)
@@ -62,7 +62,7 @@ export const recordStorage = {
   },
 }
 
-interface DevRecordHistory {
+interface DevTaskHistory {
   version: number
   changedBy: string
   changedAt: string

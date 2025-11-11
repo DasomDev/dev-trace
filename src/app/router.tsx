@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { HomePage } from '@/pages/home/index'
-import { RecordAddPage } from '@/pages/RecordAddPage'
-// import { RecordListPage } from '@/pages/RecordListPage'
-// import { RecordDetailPage } from '@/pages/RecordDetailPage'
+import { TaskAddPage } from '@/pages/TaskAddPage'
+// import { TaskListPage } from '@/pages/TaskListPage'
+// import { TaskDetailPage } from '@/pages/TaskDetailPage'
 
 export const router = createBrowserRouter([
   {
@@ -11,10 +11,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/add',
-    element: <RecordAddPage />,
+    element: <TaskAddPage />,
   },
   // {
-  //   path: '/record/:id',
-  //   element: <RecordDetailPage />,
+  //   path: '/task/:id',
+  //   element: <TaskDetailPage />,
   // },
 ])

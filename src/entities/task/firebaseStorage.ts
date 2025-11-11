@@ -1,25 +1,25 @@
 import { db } from '@/config/firebase'
 import { collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
-import type { DevRecord } from './types'
+import type { DevTask } from './types'
 
-const COLLECTION_NAME = 'records'
+const COLLECTION_NAME = 'tasks'
 
-export const firebaseRecordStorage = {
-  async getAll(): Promise<DevRecord[]> {
+export const firebaseTaskStorage = {
+  async getAll(): Promise<DevTask[]> {
     const querySnapshot = await getDocs(collection(db, COLLECTION_NAME))
-    const records: DevRecord[] = []
+    const tasks: DevTask[] = []
     
     querySnapshot.forEach((docSnap) => {
-      records.push({
+      tasks.push({
         id: docSnap.id,
         ...docSnap.data(),
-      } as DevRecord)
+      } as DevTask)
     })
     
-    return records
+    return tasks
   },
 
-  async getById(id: string): Promise<DevRecord | null> {
+  async getById(id: string): Promise<DevTask | null> {
     const docRef = doc(db, COLLECTION_NAME, id)
     const docSnap = await getDoc(docRef)
     
@@ -30,22 +30,22 @@ export const firebaseRecordStorage = {
     return {
       id: docSnap.id,
       ...docSnap.data(),
-    } as DevRecord
+    } as DevTask
   },
 
-  async save(record: DevRecord): Promise<string> {
-    if (record.id) {
+  async save(task: DevTask): Promise<string> {
+    if (task.id) {
       // 기존 문서 업데이트
-      const docRef = doc(db, COLLECTION_NAME, record.id)
+      const docRef = doc(db, COLLECTION_NAME, task.id)
       await updateDoc(docRef, {
-        ...record,
+        ...task,
         updatedAt: new Date().toISOString(),
       })
-      return record.id
+      return task.id
     } else {
       // 새 문서 생성
       const docRef = await addDoc(collection(db, COLLECTION_NAME), {
-        ...record,
+        ...task,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       })
